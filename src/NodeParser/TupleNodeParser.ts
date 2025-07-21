@@ -1,11 +1,14 @@
 import ts from "typescript";
-import { Context, NodeParser } from "../NodeParser";
-import { SubNodeParser } from "../SubNodeParser";
-import { BaseType } from "../Type/BaseType";
-import { TupleType } from "../Type/TupleType";
+import type { Context, NodeParser } from "../NodeParser.js";
+import type { SubNodeParser } from "../SubNodeParser.js";
+import type { BaseType } from "../Type/BaseType.js";
+import { TupleType } from "../Type/TupleType.js";
 
 export class TupleNodeParser implements SubNodeParser {
-    public constructor(protected typeChecker: ts.TypeChecker, protected childNodeParser: NodeParser) {}
+    public constructor(
+        protected typeChecker: ts.TypeChecker,
+        protected childNodeParser: NodeParser,
+    ) {}
 
     public supportsNode(node: ts.TupleTypeNode): boolean {
         return node.kind === ts.SyntaxKind.TupleType;
@@ -15,7 +18,7 @@ export class TupleNodeParser implements SubNodeParser {
         return new TupleType(
             node.elements.map((item) => {
                 return this.childNodeParser.createType(item, context);
-            })
+            }),
         );
     }
 }

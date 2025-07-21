@@ -1,8 +1,12 @@
-import { BaseType } from "./BaseType";
-import { strip } from "../Utils/String";
+import { BaseType } from "./BaseType.js";
+import { strip } from "../Utils/String.js";
 
 export class ObjectProperty {
-    public constructor(private name: string, private type: BaseType, private required: boolean) {}
+    public constructor(
+        private name: string,
+        private type: BaseType,
+        private required: boolean,
+    ) {}
 
     public getName(): string {
         return strip(this.name);
@@ -22,7 +26,7 @@ export class ObjectType extends BaseType {
         private properties: readonly ObjectProperty[],
         private additionalProperties: BaseType | boolean,
         // whether the object is `object`
-        private nonPrimitive: boolean = false
+        private nonPrimitive: boolean = false,
     ) {
         super();
     }

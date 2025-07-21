@@ -1,6 +1,6 @@
 import stringify from "safe-stable-stringify";
-import { Node } from "typescript";
-import { Context } from "../NodeParser";
+import type { Node } from "typescript";
+import type { Context } from "../NodeParser.js";
 
 export function hash(a: string | boolean | number | (string | boolean | number)[] | object): string | number {
     if (typeof a === "number") {
@@ -52,5 +52,5 @@ export function getKey(node: Node, context: Context): string {
     const id = ids.join("-");
     const args = context.getArguments();
 
-    return args.length ? `${id}<${args.map((arg) => arg.getId()).join(",")}>` : id;
+    return args.length ? `${id}<${args.map((arg) => arg?.getId()).join(",")}>` : id;
 }
